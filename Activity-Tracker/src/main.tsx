@@ -6,5 +6,5 @@ import Connect from './Webpage-Connect/Connect';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Connect />
-  </StrictMode>,
+  </StrictMode>
 )
