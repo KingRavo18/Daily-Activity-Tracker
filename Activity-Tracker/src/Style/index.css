@@ -1,6 +1,6 @@
 :root{
   color-scheme: light dark;
-  --background-color: light-dark(white, black);
+  --background-color: light-dark(rgb(233, 233, 233), rgb(46, 46, 46));
 }
 
 *{
