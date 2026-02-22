@@ -1,11 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function Connect(){
     const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-    async function HandleSignUp(): Promise<void>{
+    async function HandleSignUp(e: React.): Promise<void>{
+        e.preventDefault();
         try{
 
         }
@@ -19,7 +20,7 @@ export default function Connect(){
 
     return(
         <main className="connection_forms">
-            <form onSubmit={HandleSignUp}>
+            <form onSubmit={e => HandleSignUp(e)}>
                 <h1>Sign Up</h1>
                 <input type="username" 
                        value={username} 
