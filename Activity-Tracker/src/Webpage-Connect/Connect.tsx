@@ -27,6 +27,7 @@ export default function Connect(){
                        placeholder="Enter username:"
                        title="Enter username"
                        aria-label="Enter username"
+                       autoFocus
                 />
                 <input type="email" 
                        value={email} 
