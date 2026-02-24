@@ -4,17 +4,34 @@ export default function Connect(){
     const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    async function HandleSignUp(e: React.): Promise<void>{
+    async function HandleSignUp(e: React.SubmitEvent<HTMLFormElement>): Promise<void>{
         e.preventDefault();
+        setIsLoading(true);
         try{
+            checkInputFields(username, email, password);
+            
 
         }
         catch(error){
 
         }
         finally{
+            setIsLoading(false);
+        }
+    }
 
+    function checkInputFields(username: string, email: string, password: string): void{
+        if(username.trim() === ""){
+            throw new Error("Please input a username.");
+        }
+        if(email.trim() === ""){
+            throw new Error("Please input an email.");
+        }
+        if(password.trim() === ""){
+            throw new Error("Please input a password.");
         }
     }
 
