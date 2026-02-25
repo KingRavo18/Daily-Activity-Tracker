@@ -64,6 +64,7 @@ export default function Connect(){
                        value="Sign Up"
                        title="Submit to Sign Up"
                        aria-label="Submit to Sign Up"
+                       disabled={isLoading}
                 />
             </form>
         </main>
