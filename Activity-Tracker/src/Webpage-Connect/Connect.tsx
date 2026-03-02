@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import ErrorMessage from "../Components/ErrorMessage";
+import ConnectLoadingSpinner from "./Components/ConnectLoadingSpinner";
 
 export default function Connect(){
     const [username, setUsername] = useState<string>("");
@@ -12,11 +14,13 @@ export default function Connect(){
         setIsLoading(true);
         try{
             checkInputFields(username, email, password);
-            
-
+            const response = await fetch("");
+            if(!response.ok){
+                throw new Error("Could not sign up. Please try again later.");
+            }
         }
         catch(error){
-
+            setErrorMessage((error as Error).message);
         }
         finally{
             setIsLoading(false);
@@ -33,6 +37,24 @@ export default function Connect(){
         if(password.trim() === ""){
             throw new Error("Please input a password.");
         }
+        if(password.length > 255){
+            throw new Error("A password cannot be longer than 255 characters.");
+        }
+        if(password.length < 8){
+            throw new Error("A password must be at least 8 symbols long.");
+        }
+        if(!Boolean(password.match(/[a-z]/))){
+            throw new Error("A password must contain a non-capital letter.");
+        }
+        if(!Boolean(password.match(/[A-Z]/))){
+            throw new Error("A password must contain a capital letter.");
+        }
+        if(!Boolean(password.match(/[0-9]/))){
+            throw new Error("A password must contain a number.");
+        }
+        if(!Boolean(password.match(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/))){
+            throw new Error("A password must contain a special character.");
+        } 
     }
 
     return(
@@ -67,6 +89,8 @@ export default function Connect(){
                        disabled={isLoading}
                 />
             </form>
+            {isLoading && !errorMessage && <ConnectLoadingSpinner />}
+            {!isLoading && errorMessage && <ErrorMessage errorMessage={errorMessage} />}
         </main>
     );
 }
